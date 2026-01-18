@@ -12,16 +12,32 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Safari 동적 뷰포트 지원 */
+  --vh: 1vh;
+}
+
+html {
+  height: 100%;
+  height: -webkit-fill-available;
 }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  min-height: 100dvh;
+  min-height: -webkit-fill-available;
   background-color: #f0f0f0;
   color: #333;
+  /* Safari 스크롤 바운스 방지 */
+  overscroll-behavior: none;
 }
 
 #root {
   min-height: 100vh;
+  min-height: 100dvh;
+  min-height: -webkit-fill-available;
+  display: flex;
+  flex-direction: column;
 }

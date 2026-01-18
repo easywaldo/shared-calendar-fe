@@ -3,6 +3,10 @@
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
 }
 
 .calendar-header {
@@ -13,6 +17,15 @@
   border-bottom: 1px solid #eee;
   flex-wrap: wrap;
   gap: 12px;
+  flex-shrink: 0;
+}
+
+.calendar-body {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .header-left {
@@ -93,6 +106,10 @@
 /* Month View */
 .month-view {
   padding: 8px;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .weekday-header {
@@ -224,7 +241,8 @@
 .week-view {
   display: flex;
   flex-direction: column;
-  max-height: calc(100vh - 200px);
+  flex: 1;
+  min-height: 0;
   overflow: hidden;
 }
 
@@ -286,6 +304,8 @@
   display: flex;
   overflow-y: auto;
   flex: 1;
+  min-height: 0;
+  -webkit-overflow-scrolling: touch;
 }
 
 .time-column {
@@ -361,14 +381,19 @@
 
 /* Day View */
 .day-view {
-  max-height: calc(100vh - 200px);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
   overflow: hidden;
 }
 
 .day-body {
   display: flex;
   overflow-y: auto;
-  height: 100%;
+  flex: 1;
+  min-height: 0;
+  -webkit-overflow-scrolling: touch;
 }
 
 .day-view .time-column {
@@ -431,6 +456,16 @@
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+/* 스크롤 영역 하단 여백 (Safari safe area 대응) */
+.day-column::after,
+.day-content::after,
+.time-column::after {
+  content: '';
+  display: block;
+  height: calc(60px + env(safe-area-inset-bottom, 0px));
+  flex-shrink: 0;
 }
 
 /* Mobile Responsive */
