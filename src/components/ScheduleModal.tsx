@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createSchedule, updateSchedule, deleteSchedule, type Schedule } from '../api/scheduleApi';
+import DateTimePicker from './DateTimePicker';
 import './ScheduleModal.css';
 
 type ScheduleModalProps = {
@@ -117,35 +118,22 @@ const ScheduleModal: React.FC<ScheduleModalProps> = ({
         <form onSubmit={handleSubmit}>
           {error && <div className="alert alert-error">{error}</div>}
 
-          <div className="form-group">
-            <label htmlFor="scheduleDate">날짜</label>
-            <input
-              type="date"
-              id="scheduleDate"
-              value={scheduleDate}
-              onChange={(e) => setScheduleDate(e.target.value)}
-              required
-            />
-          </div>
+          <DateTimePicker
+            label="시작"
+            date={scheduleDate}
+            time={startTime}
+            onDateChange={setScheduleDate}
+            onTimeChange={setStartTime}
+          />
 
-          <div className="form-group">
-            <label>시간</label>
-            <div className="time-inputs">
-              <input
-                type="time"
-                value={startTime}
-                onChange={(e) => setStartTime(e.target.value)}
-                required
-              />
-              <span className="time-separator">~</span>
-              <input
-                type="time"
-                value={endTime}
-                onChange={(e) => setEndTime(e.target.value)}
-                required
-              />
-            </div>
-          </div>
+          <DateTimePicker
+            label="종료"
+            date={scheduleDate}
+            time={endTime}
+            onDateChange={setScheduleDate}
+            onTimeChange={setEndTime}
+            minTime={startTime}
+          />
 
           <div className="form-group">
             <label htmlFor="title">제목</label>
